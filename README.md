@@ -2,6 +2,8 @@
 
 Welcome to taglessfinal!
 
+following this post: http://www.beyondthelines.net/programming/introduction-to-tagless-final/ 
+
 ## Contribution policy ##
 
 Contributions via GitHub pull requests are gladly accepted from their original author. Along with
