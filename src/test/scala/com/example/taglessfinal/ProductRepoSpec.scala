@@ -1,8 +1,8 @@
 package com.example.taglessfinal
 
+import cats.Id
 import org.scalatest.{ FreeSpec, MustMatchers }
 import cats.implicits._
-
 import monix.cats._
 import monix.eval.Task
 
@@ -11,6 +11,8 @@ import scala.concurrent.duration._
 import concurrent.ExecutionContext.Implicits.global
 
 class ProductRepoSpec extends FreeSpec with MustMatchers {
+
+  // th repo is the interpreter in this case
 
   "must run future-based program" in {
 
@@ -45,7 +47,19 @@ class ProductRepoSpec extends FreeSpec with MustMatchers {
     }
     val prog                             = new Program[Task](taskRepo)
     val getResult: Task[Option[Product]] = prog.renameProduct(ProductId("abc"), "someName")
-    val res = Await.result(getResult.runAsync, 10.seconds)
+    val res                              = Await.result(getResult.runAsync, 10.seconds)
+    println(res)
+  }
+
+  "must run id-based program" in {
+    val idRepo = new ProductRepo[Id] {
+      override def findProduct(id: ProductId): Id[Option[Product]]                    = Some(Product(id, "fake"))
+      override def storeProduct(p: Product): Id[Unit]                                 = ()
+      override def incrementProductSales(productId: ProductId, amount: Int): Id[Unit] = ()
+    }
+
+    val prog = new Program[Id](idRepo)
+    val res  = prog.renameProduct(ProductId("id"), "newName")
     println(res)
   }
 
