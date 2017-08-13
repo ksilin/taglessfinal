@@ -2,7 +2,9 @@
 
 Welcome to taglessfinal!
 
-following this post: http://www.beyondthelines.net/programming/introduction-to-tagless-final/ 
+following this post: http://www.beyondthelines.net/programming/introduction-to-tagless-final/
+
+gist with final version: https://gist.github.com/btlines/2403b10db3cd140423e4b8666c03b45f
 
 ## Contribution policy ##
 
